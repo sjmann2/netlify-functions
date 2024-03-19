@@ -3,3 +3,7 @@ export default async (req, context) => {
             message: "Hello World!"
         });
 };
+
+export const config = {
+    path: "/.netlify/functions/hello-world"
+  }

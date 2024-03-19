@@ -11,3 +11,7 @@ export default async (req, context) => {
         pokemon: data.pokemon_entries.map((entry) => entry.pokemon_species.name)    
     });
 };
+
+export const config = {
+    path: "/.netlify/functions/pokedex"
+  }
