@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie-edge" />
+  <title>Hello World</title>
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      background: rgb(223, 154, 213);
+    }
+
+    h1 {
+      font-family: sans-serif;
+      font-size: 50px;
+      width: 100%;
+      padding: 30px;
+      text-align: center;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>
+    Hello World Pt 2
+  </h1>
+
+  <button id="fetch-btn">Fetch</button>
+  <p id="response-output">Response Placeholder</p>
+
+  <button id="fetch-kanto-btn">Fetch Kanto Pokedex!</button>
+  <button id="fetch-hoenn-btn">Fetch Hoenn Pokedex!</button>
+
+  <p id="response-output">Response Placeholder</p>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const fetchBtn = document.getElementById('fetch-btn')
+      const responseText = document.getElementById('response-output')
+      const fetchKantoBtn = document.getElementById('fetch-kanto-btn')
+      const fetchHoennBtn = document.getElementById('fetch-hoenn-btn')
+
+      fetchKantoBtn.addEventListener('click', async () => {
+        const response = await fetch('/.netlify/functions/pokedex', {
+          method: 'POST',
+          body: JSON.stringify({
+            region: 'kanto'
+          })
+        })
+            .then(response => response.json())
+
+        responseText.innerText = JSON.stringify(response)
+      })
+
+      fetchHoennBtn.addEventListener('click', async () => {
+        const response = await fetch('/.netlify/functions/pokedex', {
+          method: 'POST',
+          body: JSON.stringify({
+            region: 'hoenn'
+          })
+        })
+            .then(response => response.json())
+
+        responseText.innerText = JSON.stringify(response)
+      })
+
+      fetchBtn.addEventListener('click', async () => {
+        const response = await fetch('/.netlify/functions/hello-world').then(response => response.json()
+        )
+        responseText.innerText = JSON.stringify(response)
+      })
+    })
+  </script>
+
+</body>
+
+</html>
